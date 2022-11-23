@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import PageRoutes from "./routes/PageRoutes";
 
 function App() {
