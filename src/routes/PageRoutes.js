@@ -7,31 +7,44 @@ import SecuredPage from "../pages/SecuredPage";
 import keycloak from "../keycloak";
 import PrivateRoute from "../utils/utils";
 import LoginPage from "../pages/LoginPage";
-
+import Header from "../components/Header/Header";
 
 function PageRoutes() {
-
-    const eventLogger = (props) =>{
-        console.log(props);
-    }
-    const tokenLogger = (t) =>{
-        console.log(t);
-    }
-    return (
-        <div>
-
-            <ReactKeycloakProvider  initOptions={{
-                 enableLogging: true,  checkLoginIframe: true }} authClient={keycloak} onEvent={eventLogger} onTokens={tokenLogger} >
-                <BrowserRouter>
-                    <Routes>
-                        <Route path="/login" element={<LoginPage/>} />
-                        <Route path="/" element={<WelcomePage />} />
-                        <Route path="/secured" element={<PrivateRoute><SecuredPage/></PrivateRoute>} />
-                    </Routes>
-                </BrowserRouter>
-            </ReactKeycloakProvider>
-        </div>
-    );
+  const eventLogger = (props) => {
+    console.log(props);
+  };
+  const tokenLogger = (t) => {
+    console.log(t);
+  };
+  return (
+    <div>
+      <ReactKeycloakProvider
+        initOptions={{
+          enableLogging: true,
+          checkLoginIframe: true,
+        }}
+        authClient={keycloak}
+        onEvent={eventLogger}
+        onTokens={tokenLogger}
+      >
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<WelcomePage />} />
+            <Route
+              path="/secured"
+              element={
+                <PrivateRoute>
+                  <SecuredPage />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </ReactKeycloakProvider>
+    </div>
+  );
 }
 
 export default PageRoutes;
