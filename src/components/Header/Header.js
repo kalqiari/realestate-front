@@ -7,7 +7,7 @@ import "./Header.css";
 function Header() {
   return (
     // <Navbar bg="light">
-    <Container fluid>
+    <Container fluid className="mb-3">
       <Row className="p-3" style={{ border: "2px red groove" }}>
         <Col>
           <h2 style={{ color: "Blue" }}>Buy/Rent_A_House</h2>
