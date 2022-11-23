@@ -1,66 +1,75 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import houseImage from "../../resources/images/house.jpg";
+import { useParams } from "react-router";
+import { dummyDataContext } from "../contexts/ContextFile";
 
 function PropertyDetail() {
+  const [houseData, setHouseData] = useState([]);
+  const dummyData = useContext(dummyDataContext);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    const singlePropertyData = dummyData.filter(
+      (property) => property.id == id
+    );
+    setHouseData(singlePropertyData);
+  }, [id]);
   return (
     <Container>
-      <Card style={{ marginTop: "55px" }}>
-        <Row>
-          <Col>
-            <Card.Img variant="top" src={houseImage} />
-          </Col>
-          <Col>
-            <Card.Body>
-              <div>
-                <i class="bi bi-heart"></i>
-              </div>
-              <Card.Title>Price: "$250000" </Card.Title>
-              <Card.Text style={{ color: "purple" }}>
-                " 3 bds | 2 ba | 1,462 sqft | House for sale"
-              </Card.Text>
-              <Card.Text style={{ color: "red" }}>
-                "1964 Savanna Cir, Fairfield, IA 52556"
-              </Card.Text>
-              <Button className="m-2" variant="outline-success">
-                Contact Agent
-              </Button>
-              <Button className="m-2" variant="outline-warning">
-                Request a tour
-              </Button>
-              <Card.Text>
-                <ul>
-                  <li>Home Type</li>
-                  <li>Square feet</li>
-                  <li>Bedrooms</li>
-                  <li>Bathrooms</li>
-                  <li>Pool: Yes</li>
-                  <li>ParkingSpace</li>
-                  <li>FloorType</li>
-                </ul>
-              </Card.Text>
-            </Card.Body>
-          </Col>
-        </Row>
-      </Card>
+      <div>
+        {houseData.length > 0 ? (
+          <Card style={{ marginTop: "55px" }}>
+            <Row>
+              <Col>
+                <Card.Img variant="top" src={houseData[0].image} />
+              </Col>
+              <Col>
+                <Card.Body>
+                  <div>
+                    <i class="bi bi-heart"></i>
+                  </div>
+                  <Card.Title>Price: {houseData[0].price} </Card.Title>
+                  <Card.Text style={{ color: "purple" }}>
+                    {houseData[0].houseDetails}
+                  </Card.Text>
+                  <Card.Text style={{ color: "red" }}>
+                    {houseData[0].location}
+                  </Card.Text>
+                  <Button className="m-2" variant="outline-success">
+                    Contact Agent
+                  </Button>
+                  <Button className="m-2" variant="outline-warning">
+                    Request a tour
+                  </Button>
+                  <div>
+                    <ul>
+                      <li>Home Type</li>
+                      <li>Square feet</li>
+                      <li>Bedrooms</li>
+                      <li>Bathrooms</li>
+                      <li>Pool: Yes</li>
+                      <li>ParkingSpace</li>
+                      <li>FloorType</li>
+                    </ul>
+                  </div>
+                </Card.Body>
+              </Col>
+            </Row>
+          </Card>
+        ) : (
+          <>
+            <Spinner animation="border" variant="warning" />
+            <Spinner animation="border" variant="success" />
+            <Spinner animation="border" variant="danger" />
+          </>
+        )}
+      </div>
     </Container>
   );
 }
 
 export default PropertyDetail;
-{
-  /* <Card>
-        <Card.Img variant="top" src="holder.js/100px180" />
-        <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-      </Card> */
-}
