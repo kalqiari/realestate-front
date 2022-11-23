@@ -1,7 +1,7 @@
 import React from "react";
-import { Col, Container, Row, Card, Button } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
-import PropertyCard from "../reusable/PropertyCard";
+import PropertyCard from "../reusable/PropertyCard/PropertyCard";
 import houseImage from "../resources/images/house.jpg";
 
 const propertyData = [
