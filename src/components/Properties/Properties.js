@@ -20,7 +20,10 @@ function Properties() {
           {propertyData.map((house) => {
             return (
               <Col md={3} key={house.id}>
-                <Link to={`/${house.id}`} style={{ textDecoration: "none" }}>
+                <Link
+                  to={`/property/${house.id}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <Property
                     image={house.image}
                     price={house.price}

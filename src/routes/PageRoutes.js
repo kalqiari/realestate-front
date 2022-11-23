@@ -33,7 +33,7 @@ function PageRoutes() {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<WelcomePage />} />
-            <Route path="/:id" element={<PropertyDetail />} />
+            <Route path="/property/:id" element={<PropertyDetail />} />
             <Route
               path="/secured"
               element={
