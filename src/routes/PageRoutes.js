@@ -19,7 +19,8 @@ function PageRoutes() {
     return (
         <div>
 
-            <ReactKeycloakProvider  initOptions={{
+            <ReactKeycloakProvider  initOptions={{ onLoad: 'check-sso',
+                silentCheckSsoRedirectUri:  "http://localhost:3000/silent-check-sso.html",
                  enableLogging: true,  checkLoginIframe: false }} authClient={keycloak} onEvent={eventLogger} onTokens={tokenLogger} >
                 <BrowserRouter>
                     <Routes>
