@@ -13,8 +13,27 @@ function PageRoutes() {
     const eventLogger = (props) =>{
         console.log(props);
     }
-    const tokenLogger = (t) =>{
-        console.log(t);
+    const tokenLogger = (eventType) =>{
+        switch (eventType) {
+            case 'onReady':
+                break;
+            case 'onInitError':
+                break;
+            case 'onAuthSuccess':
+                console.log('onAuthSuccess');
+                break;
+            case 'onAuthError':
+                break;
+            case 'onAuthRefreshSuccess':
+                console.log('onAuthRefreshSuccess');
+                break;
+            case 'onAuthRefreshError':
+                break;
+            case 'onTokenExpired':
+                break;
+            case 'onAuthLogout':
+                break;
+        }
     }
     return (
         <div>
