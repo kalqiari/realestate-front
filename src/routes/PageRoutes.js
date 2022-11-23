@@ -8,6 +8,7 @@ import keycloak from "../keycloak";
 import PrivateRoute from "../utils/utils";
 import LoginPage from "../pages/LoginPage";
 import Header from "../components/Header/Header";
+import PropertyDetail from "../components/PropertyDetail/PropertyDetail";
 
 function PageRoutes() {
   const eventLogger = (props) => {
@@ -31,7 +32,7 @@ function PageRoutes() {
           <Header />
           <Routes>
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/" element={<WelcomePage />} />
+            <Route path="/" element={<PropertyDetail />} />
             <Route
               path="/secured"
               element={
