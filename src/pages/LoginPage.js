@@ -1,21 +1,29 @@
-import * as React from 'react'
-import { useCallback } from 'react'
-import {Navigate, useLocation} from 'react-router-dom'
+import {useCallback, useEffect} from 'react'
+import {useLocation, useNavigate, useParams, useSearchParams} from 'react-router-dom'
 import {useKeycloak} from "@react-keycloak/web";
 
 const LoginPage = () => {
+
+    const {keycloak, initialized} = useKeycloak()
+    const navigate = useNavigate()
     const location = useLocation()
-    const locationState = location.state;
-    const { keycloak } = useKeycloak()
+    const {params} = useSearchParams({})
+    const from = location.state?.from || "/";
 
     const login = useCallback(() => {
-        keycloak?.login()
+        keycloak?.login();
     }, [keycloak])
 
-    if (keycloak?.authenticated)
-        return <Navigate to={"/" } />
+    useEffect(() => {
+        if (keycloak?.authenticated) {
+            console.log("user authinticated")
+            navigate(from, {replace: true});
+        } else {
+            if (initialized) login();
+        }
+    }, [keycloak, initialized])
 
-    return <h1>"test"</h1>
+
 }
 
 export default LoginPage
