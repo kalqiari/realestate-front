@@ -1,4 +1,13 @@
+import React from "react";
 
-export default function WelcomePage(){
-    return <h1>welcome</h1>
+import Properties from "../components/Properties/Properties";
+
+function WelcomePage() {
+  return (
+    <div>
+      <Properties />
+    </div>
+  );
 }
+
+export default WelcomePage;
