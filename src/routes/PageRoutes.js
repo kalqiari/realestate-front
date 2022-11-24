@@ -12,6 +12,8 @@ import Dashboard from "../pages/admin/Dashboard";
 import NewApplication from "../components/NewApplication/NewApplication";
 import Owner from "../components/Users/Owner/Owner";
 import Application from "../components/Application/Application";
+import NewProperty from "../components/NewProperty/NewProperty";
+
 
 function PageRoutes() {
   const eventLogger = (props) => {
@@ -61,6 +63,7 @@ function PageRoutes() {
             </Route>
             <Route element={<OwnerRoutes />}>
               <Route path="/owner" element={<SecuredPage />} />
+              <Route path="/newProperty" element={<NewProperty />} />
             </Route>
             <Route element={<CustomerRoutes />}>
               <Route path="/property/:id/application/new" element={<NewApplication />} />
@@ -73,7 +76,6 @@ function PageRoutes() {
       </ReactKeycloakProvider>
     </div>
   );
-
 }
 
 export default PageRoutes;

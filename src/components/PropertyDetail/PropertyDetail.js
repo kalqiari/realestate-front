@@ -82,22 +82,3 @@ function PropertyDetail() {
 }
 
 export default PropertyDetail;
-
-// <Row>
-//   <Col className="mb-4">
-//     <Card>
-//       <Card.Img width={280} height={210} variant="top" src={houseData?.photos[0].url} />
-//       <Card.Body>
-//         <Card.Title>{props.price} </Card.Title>
-//         <Card.Text style={{ color: "purple" }}>
-//           {houseData?.bedrooms + " bds | " + houseData?.bathrooms +" ba |"+ houseData?.sqFt + " sqft | House for "+ houseData?.listingType}
-//         </Card.Text>
-//         <Card.Text style={{ color: "red" }}>{houseData.streetAddress + ", "+ houseData.city+ ", "+houseData.state+ " " +houseData.zipcode }</Card.Text>
-//         <Card.Text>VILLAGE REALITY</Card.Text>
-//         <div>
-//           <i className="bi bi-heart"></i>
-//         </div>
-//       </Card.Body>
-//     </Card>
-//   </Col>
-// </Row>
