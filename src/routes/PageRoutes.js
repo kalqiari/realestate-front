@@ -1,8 +1,7 @@
 import React from "react";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import WelcomePage from "../pages/WelcomePage";
+import HomePage from "../pages/HomePage";
 import SecuredPage from "../pages/SecuredPage";
 import keycloak from "../keycloak";
 import LoginPage from "../pages/LoginPage";
@@ -17,6 +16,8 @@ import NewProperty from "../components/NewProperty/NewProperty";
 import Applications from "../components/Applications/Applications";
 import Question from "../components/Question/Question";
 import Properties from "../components/Properties/Properties";
+import NewProperty from "../components/NewProperty/NewProperty";
+import Error404 from "../pages/Error404";
 
 function PageRoutes() {
   const eventLogger = (props) => {
@@ -61,25 +62,19 @@ function PageRoutes() {
         <BrowserRouter>
           <Header />
           <Routes>
+            <Route path='*' element={<Error404 />} />
             <Route element={<AdminRoutes />}>
               <Route path="/admin" element={<Dashboard />} />
             </Route>
             <Route element={<OwnerRoutes />}>
               <Route path="/owner" element={<SecuredPage />} />
+              <Route path="/newProperty" element={<NewProperty />} />
             </Route>
             <Route element={<CustomerRoutes />}>
-              <Route path="/new-application" element={<NewApplication />} />
-              <Route path="/application" element={<Application />} />
+              <Route path="/property/:id/application/new" element={<NewApplication />} />
             </Route>
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/newApplication" element={<NewApplication />} />
-            <Route path="/application" element={<Application />} />
-            <Route path="/applications" element={<Applications />} />
-            <Route path="/question" element={<Question />} />
-            <Route path="/" element={<WelcomePage />} />
-            <Route path="/newProperty" element={<NewProperty />} />
-            <Route path="/property/:id" element={<PropertyDetail />} />
-            <Route path="/properties" element={<Properties />} />
+            <Route path="/" element={<HomePage />} />
           </Routes>
         </BrowserRouter>
       </ReactKeycloakProvider>
