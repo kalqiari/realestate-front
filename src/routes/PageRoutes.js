@@ -1,8 +1,7 @@
 import React from "react";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
-
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import WelcomePage from "../pages/WelcomePage";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import HomePage from "../pages/HomePage";
 import SecuredPage from "../pages/SecuredPage";
 import keycloak from "../keycloak";
 import LoginPage from "../pages/LoginPage";
@@ -14,6 +13,7 @@ import NewApplication from "../components/NewApplication/NewApplication";
 import Owner from "../components/Users/Owner/Owner";
 import Application from "../components/Application/Application";
 import NewProperty from "../components/NewProperty/NewProperty";
+
 
 function PageRoutes() {
   const eventLogger = (props) => {
@@ -63,14 +63,13 @@ function PageRoutes() {
             </Route>
             <Route element={<OwnerRoutes />}>
               <Route path="/owner" element={<SecuredPage />} />
+              <Route path="/newProperty" element={<NewProperty />} />
             </Route>
             <Route element={<CustomerRoutes />}>
-              <Route path="/new-application" element={<NewApplication />} />
-              <Route path="/application" element={<Application />} />
+              <Route path="/property/:id/application/new" element={<NewApplication />} />
             </Route>
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/" element={<WelcomePage />} />
-            <Route path="/newProperty" element={<NewProperty />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/property/:id" element={<PropertyDetail />} />
           </Routes>
         </BrowserRouter>

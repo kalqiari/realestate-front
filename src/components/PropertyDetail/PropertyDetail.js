@@ -5,47 +5,50 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useParams, useNavigate } from "react-router";
 import { dummyDataContext } from "../contexts/ContextFile";
+import axios from "axios";
+import Loader from "../Loader/Loader";
 
 function PropertyDetail() {
-  const [houseData, setHouseData] = useState([]);
-  const dummyData = useContext(dummyDataContext);
+  const [houseData, setHouseData] = useState(null);
   let navigate = useNavigate();
   const { id } = useParams();
 
-  useEffect(() => {
-    const singlePropertyData = dummyData.filter(
-      (property) => property.id == id
-    );
-    setHouseData(singlePropertyData);
+
+  useEffect(()=>{
+      axios.get("http://localhost:8080/api/v1/properties/"+ id).then(response => {
+        setHouseData(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
   }, [id]);
+    
+
   return (
     <Container>
       <div>
-        {houseData.length > 0 ? (
+        {houseData ? (
           <Card style={{ marginTop: "55px" }}>
             <Row>
               <Col>
-                <Card.Img variant="top" src={houseData[0].image} />
+                <Card.Img variant="top" src={houseData?.photos[0].url} />
               </Col>
               <Col>
                 <Card.Body>
                   <div>
-                    <i class="bi bi-heart"></i>
+                    <i className="bi bi-heart"></i>
                   </div>
-                  <Card.Title>Price: {houseData[0].price} </Card.Title>
+                  <Card.Title>Price: {houseData.price} </Card.Title>
                   <Card.Text style={{ color: "purple" }}>
-                    {houseData[0].houseDetails}
+                    {houseData?.bedrooms + " bds | " + houseData?.bathrooms +" ba |"+ houseData?.sqFt + " sqft | House for "+ houseData?.listingType}
                   </Card.Text>
                   <Card.Text style={{ color: "red" }}>
-                    {houseData[0].location}
+                    {houseData.streetAddress + ", "+ houseData.city+ ", "+houseData.state+ " " +houseData.zipcode}
                   </Card.Text>
                   <Button
                     className="m-2 px-5"
                     variant="outline-success"
                     onClick={() =>
-                      navigate("/application", {
-                        state: { id: id },
-                      })
+                      navigate("/property/"+id+"/application/new")
                     }
                   >
                     Contact
@@ -70,9 +73,7 @@ function PropertyDetail() {
           </Card>
         ) : (
           <>
-            <Spinner animation="border" variant="warning" />
-            <Spinner animation="border" variant="success" />
-            <Spinner animation="border" variant="danger" />
+           <Loader/>
           </>
         )}
       </div>

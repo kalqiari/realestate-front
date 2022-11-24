@@ -1,18 +1,27 @@
-import React, { useContext } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import Property from "../Property/Property";
-
-import { dummyDataContext } from "../contexts/ContextFile";
+import keycloak from "../../keycloak";
+import axios from "axios";
 
 function Properties() {
-  const propertyData = useContext(dummyDataContext);
+  const [propertiesData, setPropertiesData]= useState([]);
+  useEffect(()=>{
+       axios.get("http://localhost:8080/api/v1/properties").then(response => {
+           setPropertiesData( response.data)
+                  }).catch(error => {
+                      console.log(error)
+                  })
+
+  },[] )
+
   return (
     <div>
       <Container>
         <Row>
-          {propertyData.map((house) => {
+          {propertiesData.map((house) => {
             return (
               <Col md={3} key={house.id}>
                 <Link
@@ -20,10 +29,7 @@ function Properties() {
                   style={{ textDecoration: "none" }}
                 >
                   <Property
-                    image={house.image}
-                    price={house.price}
-                    houseDetails={house.houseDetails}
-                    location={house.location}
+                      house={house}
                   />
                 </Link>
               </Col>
