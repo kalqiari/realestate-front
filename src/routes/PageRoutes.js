@@ -69,8 +69,8 @@ function PageRoutes() {
               <Route path="/application" element={<Application />} />
             </Route>
             <Route path="/login" element={<LoginPage />} />
-            {/* <Route path="/" element={<WelcomePage />} /> */}
-            <Route path="/" element={<NewProperty />} />
+            <Route path="/" element={<WelcomePage />} />
+            <Route path="/newProperty" element={<NewProperty />} />
             <Route path="/property/:id" element={<PropertyDetail />} />
           </Routes>
         </BrowserRouter>
