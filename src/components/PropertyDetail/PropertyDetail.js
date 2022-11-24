@@ -10,7 +10,6 @@ function PropertyDetail() {
   const [houseData, setHouseData] = useState([]);
   const dummyData = useContext(dummyDataContext);
   let navigate = useNavigate();
-
   const { id } = useParams();
 
   useEffect(() => {
