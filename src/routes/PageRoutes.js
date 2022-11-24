@@ -13,6 +13,7 @@ import Dashboard from "../pages/admin/Dashboard";
 import NewApplication from "../components/NewApplication/NewApplication";
 import Owner from "../components/Users/Owner/Owner";
 import Application from "../components/Application/Application";
+import NewProperty from "../components/NewProperty/NewProperty";
 
 function PageRoutes() {
   const eventLogger = (props) => {
@@ -68,7 +69,8 @@ function PageRoutes() {
               <Route path="/application" element={<Application />} />
             </Route>
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/" element={<WelcomePage />} />
+            {/* <Route path="/" element={<WelcomePage />} /> */}
+            <Route path="/" element={<NewProperty />} />
             <Route path="/property/:id" element={<PropertyDetail />} />
           </Routes>
         </BrowserRouter>
