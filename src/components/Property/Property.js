@@ -17,7 +17,7 @@ function Property(props) {
                 <Card.Text style={{ color: "red" }}>{props.location}</Card.Text>
                 <Card.Text>VILLAGE REALITY</Card.Text>
                 <div>
-                  <i class="bi bi-heart"></i>
+                  <i className="bi bi-heart"></i>
                 </div>
               </Card.Body>
             </Card>

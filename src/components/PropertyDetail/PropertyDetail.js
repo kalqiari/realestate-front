@@ -30,7 +30,7 @@ function PropertyDetail() {
               <Col>
                 <Card.Body>
                   <div>
-                    <i class="bi bi-heart"></i>
+                    <i className="bi bi-heart"></i>
                   </div>
                   <Card.Title>Price: {houseData[0].price} </Card.Title>
                   <Card.Text style={{ color: "purple" }}>
