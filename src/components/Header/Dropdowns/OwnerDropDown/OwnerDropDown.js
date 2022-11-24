@@ -19,6 +19,11 @@ function OwnerDropDown(props) {
                   <strong>Your Properties</strong>
                 </div>
               </Link>
+              <Link className="link-route" to="/offers">
+                <div className="m-2">
+                  <strong>Offers</strong>
+                </div>
+              </Link>
 
               <Link className="link-route" to="/">
                 <div className="m-2">
