@@ -10,9 +10,8 @@ import PropertyDetail from "../components/PropertyDetail/PropertyDetail";
 import { AdminRoutes, OwnerRoutes, CustomerRoutes } from "../utils/utils";
 import Dashboard from "../pages/admin/Dashboard";
 import NewApplication from "../components/NewApplication/NewApplication";
-import Owner from "../components/Users/Owner/Owner";
-import Application from "../components/Application/Application";
 import NewProperty from "../components/NewProperty/NewProperty";
+import Error404 from "../pages/Error404";
 
 
 function PageRoutes() {
@@ -58,6 +57,7 @@ function PageRoutes() {
         <BrowserRouter>
           <Header />
           <Routes>
+            <Route path='*' element={<Error404 />} />
             <Route element={<AdminRoutes />}>
               <Route path="/admin" element={<Dashboard />} />
             </Route>
