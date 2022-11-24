@@ -1,8 +1,7 @@
 import React from "react";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
-
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import WelcomePage from "../pages/WelcomePage";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import HomePage from "../pages/HomePage";
 import SecuredPage from "../pages/SecuredPage";
 import keycloak from "../keycloak";
 import LoginPage from "../pages/LoginPage";
@@ -68,13 +67,14 @@ function PageRoutes() {
               <Route path="/application" element={<Application />} />
             </Route>
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/" element={<WelcomePage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/property/:id" element={<PropertyDetail />} />
           </Routes>
         </BrowserRouter>
       </ReactKeycloakProvider>
     </div>
   );
+
 }
 
 export default PageRoutes;
