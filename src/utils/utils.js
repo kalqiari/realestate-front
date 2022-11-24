@@ -1,13 +1,12 @@
-import {Navigate, Outlet, useLocation, useNavigate} from 'react-router-dom'
+import {Outlet} from 'react-router-dom'
 import {useKeycloak} from "@react-keycloak/web";
 import {useEffect} from "react";
 import LoginPage from "../pages/LoginPage";
 import Loader from "../components/Loader/Loader";
+import Error401 from "../pages/Error401";
 
 const PrivateRoutes = () => {
     const {keycloak, initialized} = useKeycloak();
-    const location=useLocation();
-
     useEffect(() => {
         if (initialized && !keycloak?.authenticated) {
             keycloak?.login();
@@ -23,8 +22,6 @@ export default PrivateRoutes;
 
 export const AdminRoutes = () => {
     const {keycloak, initialized} = useKeycloak();
-    const location=useLocation();
-
     useEffect(() => {
         if (initialized && !keycloak?.authenticated) {
             keycloak?.login();
@@ -38,7 +35,7 @@ export const AdminRoutes = () => {
             if(keycloak?.authenticated && keycloak?.hasResourceRole('admin'))
                 return <Outlet/>
             else if (keycloak?.authenticated)
-                return null;
+                return <Error401/>;
             else
                 return <LoginPage/>
     }
@@ -47,8 +44,6 @@ export const AdminRoutes = () => {
 
 export const OwnerRoutes = () => {
     const {keycloak, initialized} = useKeycloak();
-    const location=useLocation();
-
     useEffect(() => {
         if (initialized && !keycloak?.authenticated) {
             keycloak?.login();
@@ -62,7 +57,7 @@ export const OwnerRoutes = () => {
         if(keycloak?.authenticated && keycloak?.hasResourceRole('owner'))
             return <Outlet/>
         else if (keycloak?.authenticated)
-            return null;
+            return <Error401/>;
         else
             return <LoginPage/>
     }
@@ -72,8 +67,6 @@ export const OwnerRoutes = () => {
 
 export const CustomerRoutes = () => {
     const {keycloak, initialized} = useKeycloak();
-    const location=useLocation();
-
     useEffect(() => {
         if (initialized && !keycloak?.authenticated) {
             keycloak?.login();
@@ -87,7 +80,7 @@ export const CustomerRoutes = () => {
         if(keycloak?.authenticated && keycloak?.hasResourceRole('customer'))
             return <Outlet/>
         else if (keycloak?.authenticated)
-            return null;
+            return <Error401/>;
         else
             return <LoginPage/>
     }
