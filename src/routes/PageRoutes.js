@@ -8,7 +8,9 @@ import keycloak from "../keycloak";
 import LoginPage from "../pages/LoginPage";
 import Header from "../components/Header/Header";
 import PropertyDetail from "../components/PropertyDetail/PropertyDetail";
-import PrivateRoutes from "../utils/utils";
+import {AdminRoutes, OwnerRoutes, CustomerRoutes} from "../utils/utils";
+import Dashboard from "../pages/admin/Dashboard";
+import NewApplication from "../components/NewApplication/NewApplication";
 
 
 function PageRoutes() {
@@ -39,20 +41,30 @@ function PageRoutes() {
     }
     return (
         <div>
-
             <ReactKeycloakProvider  initOptions={{ onLoad: 'check-sso',
                 silentCheckSsoRedirectUri:  "http://localhost:3000/silent-check-sso.html",
                  enableLogging: true,  checkLoginIframe: false }} authClient={keycloak} onEvent={eventLogger} onTokens={tokenLogger} >
+
                 <BrowserRouter>
+                    <Header/>
                     <Routes>
+
+                        <Route element={<AdminRoutes />}>
+                            <Route path="/admin" element={<Dashboard/>} />
+                        </Route>
+                        <Route element={<OwnerRoutes />}>
+                            <Route path="/owner" element={<SecuredPage/>} />
+                        </Route>
+                        <Route element={<CustomerRoutes />}>
+                            <Route path="/new-application" element={<NewApplication/>} />
+                        </Route>
                         <Route path="/login" element={<LoginPage/>} />
                         <Route path="/" element={<WelcomePage />} />
                         <Route path="/property/:id" element={<PropertyDetail />} />
-                        <Route element={<PrivateRoutes />}>
-                            <Route path="/secured" element={<SecuredPage/>} />
-                        </Route>
                     </Routes>
+
                 </BrowserRouter>
+
             </ReactKeycloakProvider>
         </div>
     );

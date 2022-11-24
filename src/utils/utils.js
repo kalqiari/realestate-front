@@ -19,4 +19,77 @@ const PrivateRoutes = () => {
     )
 }
 
-export default PrivateRoutes
+export default PrivateRoutes;
+
+export const AdminRoutes = () => {
+    const {keycloak, initialized} = useKeycloak();
+    const location=useLocation();
+
+    useEffect(() => {
+        if (initialized && !keycloak?.authenticated) {
+            keycloak?.login();
+        }
+
+    }, [keycloak?.authenticated, initialized]);
+
+
+    if(initialized)
+    {
+            if(keycloak?.authenticated && keycloak?.hasResourceRole('admin'))
+                return <Outlet/>
+            else if (keycloak?.authenticated)
+                return null;
+            else
+                return <LoginPage/>
+    }
+    else  return <Loader />
+}
+
+export const OwnerRoutes = () => {
+    const {keycloak, initialized} = useKeycloak();
+    const location=useLocation();
+
+    useEffect(() => {
+        if (initialized && !keycloak?.authenticated) {
+            keycloak?.login();
+        }
+
+    }, [keycloak?.authenticated, initialized]);
+
+
+    if(initialized)
+    {
+        if(keycloak?.authenticated && keycloak?.hasResourceRole('owner'))
+            return <Outlet/>
+        else if (keycloak?.authenticated)
+            return null;
+        else
+            return <LoginPage/>
+    }
+    else  return <Loader />
+}
+
+
+export const CustomerRoutes = () => {
+    const {keycloak, initialized} = useKeycloak();
+    const location=useLocation();
+
+    useEffect(() => {
+        if (initialized && !keycloak?.authenticated) {
+            keycloak?.login();
+        }
+
+    }, [keycloak?.authenticated, initialized]);
+
+
+    if(initialized)
+    {
+        if(keycloak?.authenticated && keycloak?.hasResourceRole('customer'))
+            return <Outlet/>
+        else if (keycloak?.authenticated)
+            return null;
+        else
+            return <LoginPage/>
+    }
+    else  return <Loader />
+}
