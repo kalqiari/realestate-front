@@ -9,6 +9,8 @@ import PrivateRoute from "../utils/utils";
 import LoginPage from "../pages/LoginPage";
 import Header from "../components/Header/Header";
 import PropertyDetail from "../components/PropertyDetail/PropertyDetail";
+import Owner from "../components/Users/Owner/Owner";
+import Application from "../components/Application/Application";
 
 function PageRoutes() {
   const eventLogger = (props) => {
@@ -33,7 +35,9 @@ function PageRoutes() {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<WelcomePage />} />
+            <Route path="/application" element={<Application />} />
             <Route path="/property/:id" element={<PropertyDetail />} />
+            <Route path="/owner" element={<Owner />} />
             <Route
               path="/secured"
               element={
