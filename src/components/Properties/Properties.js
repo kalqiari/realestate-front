@@ -3,7 +3,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import Property from "../Property/Property";
-import {getPropertiesData} from "../../services/properties";
 import keycloak from "../../keycloak";
 import axios from "axios";
 
