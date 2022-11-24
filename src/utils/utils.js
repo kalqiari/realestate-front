@@ -3,6 +3,7 @@ import {useKeycloak} from "@react-keycloak/web";
 import {useEffect} from "react";
 import LoginPage from "../pages/LoginPage";
 import Loader from "../components/Loader/Loader";
+import Error401 from "../pages/Error401";
 
 const PrivateRoutes = () => {
     const {keycloak, initialized} = useKeycloak();
@@ -34,7 +35,7 @@ export const AdminRoutes = () => {
             if(keycloak?.authenticated && keycloak?.hasResourceRole('admin'))
                 return <Outlet/>
             else if (keycloak?.authenticated)
-                return null;
+                return <Error401/>;
             else
                 return <LoginPage/>
     }
@@ -56,7 +57,7 @@ export const OwnerRoutes = () => {
         if(keycloak?.authenticated && keycloak?.hasResourceRole('owner'))
             return <Outlet/>
         else if (keycloak?.authenticated)
-            return null;
+            return <Error401/>;
         else
             return <LoginPage/>
     }
@@ -79,7 +80,7 @@ export const CustomerRoutes = () => {
         if(keycloak?.authenticated && keycloak?.hasResourceRole('customer'))
             return <Outlet/>
         else if (keycloak?.authenticated)
-            return null;
+            return <Error401/>;
         else
             return <LoginPage/>
     }
