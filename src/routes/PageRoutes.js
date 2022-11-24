@@ -10,12 +10,6 @@ import PropertyDetail from "../components/PropertyDetail/PropertyDetail";
 import { AdminRoutes, OwnerRoutes, CustomerRoutes } from "../utils/utils";
 import Dashboard from "../pages/admin/Dashboard";
 import NewApplication from "../components/NewApplication/NewApplication";
-import Owner from "../components/Users/Owner/Owner";
-import Application from "../components/Application/Application";
-import NewProperty from "../components/NewProperty/NewProperty";
-import Applications from "../components/Applications/Applications";
-import Question from "../components/Question/Question";
-import Properties from "../components/Properties/Properties";
 import NewProperty from "../components/NewProperty/NewProperty";
 import Error404 from "../pages/Error404";
 
@@ -75,6 +69,8 @@ function PageRoutes() {
             </Route>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<HomePage />} />
+            <Route path="/property/:id" element={<PropertyDetail />} />
+
           </Routes>
         </BrowserRouter>
       </ReactKeycloakProvider>
