@@ -12,7 +12,6 @@ function Application() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = formRef.current;
-
     const dataForm = {
       propertyId: locationValue.state.id,
       optionType: form["optionType"].value,
