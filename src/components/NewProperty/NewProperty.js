@@ -38,7 +38,6 @@ function NewProperty() {
     setNewPropertyData(dataForm);
     e.target.reset();
   };
-  console.log(newPropertyData);
 
   return (
     <Container>
