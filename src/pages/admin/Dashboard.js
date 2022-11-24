@@ -121,7 +121,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                </div>{/* /.container-fluid */}
+                </div>
             </section>
 
         </div>
