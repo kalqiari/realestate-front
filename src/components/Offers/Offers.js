@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import houseImage from "../../resources/images/house.jpg";
 
-function Offer(props) {
+function Offers(props) {
   return (
     <Container>
       <Row className="mb-5">
@@ -54,4 +54,4 @@ function Offer(props) {
   );
 }
 
-export default Offer;
+export default Offers;

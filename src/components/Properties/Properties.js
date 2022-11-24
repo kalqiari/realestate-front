@@ -25,7 +25,7 @@ function Properties() {
             return (
               <Col md={3} key={house.id}>
                 <Link
-                  to={`/property/${house.id}`}
+                  to={`/properties/${house.id}`}
                   style={{ textDecoration: "none" }}
                 >
                   <Property

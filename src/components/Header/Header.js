@@ -1,18 +1,21 @@
 import React, {useEffect, useState} from "react";
-import { Col, Row, Button, Popover, OverlayTrigger } from "react-bootstrap";
+import { Col, Row, Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import {Link, useNavigate} from "react-router-dom";
-import AdminDropDown from "./Dropdowns/AdminDropDown/AdminDropDown";
-import CustomerDropDown from "./Dropdowns/CustomerDropDown/CustomerDropDown";
-import OwnerDropDown from "./Dropdowns/OwnerDropDown/OwnerDropDown";
-
 import "./Header.css";
 import {useKeycloak} from "@react-keycloak/web";
+import ViewerHeader from "./ViewerHeader/ViewerHeader";
+import AdminHeader from "./AdminHeader/AdminHeader";
+import OwnerHeader from "./OwnerHeader/OwnerHeader";
+import CustomerHeader from "./CustomerHeader/CustomerHeader";
 
 const Header= () => {
     const navigate = useNavigate();
     const {keycloak, initialized} = useKeycloak();
     const [loginState, setLoginState] = useState(null);
+    const [headerState, setHeaderState] = useState(<ViewerHeader/>);
+
+
     useEffect(()=> {
         setLoginState(  initialized &&  !keycloak.authenticated ?
             <Row>
@@ -35,6 +38,16 @@ const Header= () => {
                     </Button>
                 </Col>
             </Row> : null)
+        if(initialized &&  keycloak.authenticated)
+        {
+            if(keycloak.hasResourceRole('admin'))
+                setHeaderState(<AdminHeader/>)
+            else if(keycloak.hasResourceRole('owner'))
+                setHeaderState(<OwnerHeader/>)
+            else if(keycloak.hasResourceRole('customer'))
+                setHeaderState(<CustomerHeader/>)
+            else setHeaderState(<ViewerHeader/>)
+        }
     }, [initialized , keycloak?.authenticated])
 
 
@@ -46,32 +59,9 @@ const Header= () => {
             <h2 style={{ color: "Blue" }}>Buy/Rent_A_House</h2>
           </Link>
         </Col>
-        <Col md={6}>
-          <Row>
-            <Col>
-              <Link className="link-route" to="/admin">
-                <AdminDropDown>
-                  <h4 style={{ color: "purple" }}>Admin</h4>
-                </AdminDropDown>
-              </Link>
-            </Col>
-            <Col>
-              <Link className="link-route" to="/customer">
-                <CustomerDropDown>
-                  <h4 style={{ color: "orange" }}>Customer</h4>
-                </CustomerDropDown>
-              </Link>
-            </Col>
-            <Col>
-              <Link className="link-route" to="/owner">
-                <OwnerDropDown>
-                  <h4 style={{ color: "grey" }}>Owner</h4>
-                </OwnerDropDown>
-              </Link>
-            </Col>
-          </Row>
-        </Col>
-
+          <Col md={6}>
+          {headerState}
+          </Col>
         <Col>
             {loginState}
         </Col>
