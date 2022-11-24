@@ -42,7 +42,6 @@ function PropertyDetail() {
               </Col>
               <Col>
                 <Card.Body>
-
                   <div onClick={() => favorite(setLike(!like))}>{favIcon}</div>
                   <Card.Title>Price: {houseData.price} </Card.Title>
                   <Card.Text style={{ color: "purple" }}>
