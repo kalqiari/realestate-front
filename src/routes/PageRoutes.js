@@ -17,6 +17,7 @@ import NewProperty from "../components/NewProperty/NewProperty";
 import Applications from "../components/Applications/Applications";
 import Question from "../components/Question/Question";
 import Properties from "../components/Properties/Properties";
+import Offer from "../components/Offer/Offer";
 
 function PageRoutes() {
   const eventLogger = (props) => {
@@ -76,6 +77,7 @@ function PageRoutes() {
             <Route path="/application" element={<Application />} />
             <Route path="/applications" element={<Applications />} />
             <Route path="/question" element={<Question />} />
+            <Route path="/offers" element={<Offer />} />
             <Route path="/" element={<WelcomePage />} />
             <Route path="/newProperty" element={<NewProperty />} />
             <Route path="/property/:id" element={<PropertyDetail />} />
