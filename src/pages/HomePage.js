@@ -2,7 +2,7 @@ import React from "react";
 import { Row } from "react-bootstrap";
 import Properties from "../components/Properties/Properties";
 
-function WelcomePage() {
+function HomePage() {
   return (
     <div>
       <Row className="m-5">
@@ -15,4 +15,4 @@ function WelcomePage() {
   );
 }
 
-export default WelcomePage;
+export default HomePage;

@@ -24,7 +24,6 @@ function OwnerDropDown(props) {
                   <strong>Offers</strong>
                 </div>
               </Link>
-
               <Link className="link-route" to="/">
                 <div className="m-2">
                   <strong>Total Views</strong>
