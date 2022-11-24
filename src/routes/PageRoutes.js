@@ -63,8 +63,7 @@ function PageRoutes() {
               <Route path="/owner" element={<SecuredPage />} />
             </Route>
             <Route element={<CustomerRoutes />}>
-              <Route path="/new-application" element={<NewApplication />} />
-              <Route path="/application" element={<Application />} />
+              <Route path="/property/:id/application/new" element={<NewApplication />} />
             </Route>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<HomePage />} />

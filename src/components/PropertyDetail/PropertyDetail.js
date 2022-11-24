@@ -48,9 +48,7 @@ function PropertyDetail() {
                     className="m-2 px-5"
                     variant="outline-success"
                     onClick={() =>
-                      navigate("/application", {
-                        state: { id: id },
-                      })
+                      navigate("/property/"+id+"/application/new")
                     }
                   >
                     Contact
