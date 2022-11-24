@@ -44,7 +44,7 @@ function PropertyDetail() {
                     variant="outline-success"
                     onClick={() =>
                       navigate("/application", {
-                        state: { id: id, name: "sabaoon" },
+                        state: { id: id },
                       })
                     }
                   >
