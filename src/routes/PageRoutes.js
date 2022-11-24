@@ -16,6 +16,7 @@ import Application from "../components/Application/Application";
 import NewProperty from "../components/NewProperty/NewProperty";
 import Applications from "../components/Applications/Applications";
 import Question from "../components/Question/Question";
+import Properties from "../components/Properties/Properties";
 
 function PageRoutes() {
   const eventLogger = (props) => {
@@ -73,10 +74,12 @@ function PageRoutes() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/newApplication" element={<NewApplication />} />
             <Route path="/application" element={<Application />} />
+            <Route path="/applications" element={<Applications />} />
             <Route path="/question" element={<Question />} />
             <Route path="/" element={<WelcomePage />} />
             <Route path="/newProperty" element={<NewProperty />} />
             <Route path="/property/:id" element={<PropertyDetail />} />
+            <Route path="/properties" element={<Properties />} />
           </Routes>
         </BrowserRouter>
       </ReactKeycloakProvider>
