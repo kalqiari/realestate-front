@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useParams, useNavigate } from "react-router";
-import { dummyDataContext } from "../contexts/ContextFile";
 import axios from "axios";
 import Loader from "../Loader/Loader";
 
@@ -60,9 +59,11 @@ function PropertyDetail() {
                   >
                     Contact
                   </Button>
-                  {/* <Button className="m-2" variant="outline-warning">
-                    Request a tour
-                  </Button> */}
+                <Button className="m-2" variant="outline-warning" onClick={() =>
+                    navigate("/properties/"+id+"/questions/new")
+                }>
+                    Need more details
+                  </Button>
                   <div>
                     <ul>
                       <li>Home Type</li>

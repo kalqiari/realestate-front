@@ -1,9 +1,6 @@
 import {Col, Row} from "react-bootstrap";
-import {Link, Route} from "react-router-dom";
+import {Link} from "react-router-dom";
 import React from "react";
-import NewApplication from "../../NewApplication/NewApplication";
-import Application from "../../Application/Application";
-import Applications from "../../Applications/Applications";
 
 const CustomerHeader = () => {
     return (
@@ -15,17 +12,17 @@ const CustomerHeader = () => {
                     </Link>
                 </Col>
                 <Col>
-                    <Link className="link-route" to="/customer">
+                    <Link className="link-route" to="/?favorite=true">
                         <h4 style={{color: "orange"}}>My Favorites</h4>
                     </Link>
                 </Col>
                 <Col>
-                    <Link className="link-route" to="/my-applications">
+                    <Link className="link-route" to="/applications">
                         <h4 style={{color: "grey"}}>My Applications</h4>
                     </Link>
                 </Col>
                 <Col>
-                    <Link className="link-route" to="/my-applications">
+                    <Link className="link-route" to="/applications">
                         <h4 style={{color: "grey"}}>Offer History</h4>
                     </Link>
                 </Col>

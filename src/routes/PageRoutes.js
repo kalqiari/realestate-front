@@ -3,7 +3,6 @@ import { ReactKeycloakProvider } from "@react-keycloak/web";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "../pages/HomePage";
-import SecuredPage from "../pages/SecuredPage";
 import keycloak from "../keycloak";
 import LoginPage from "../pages/LoginPage";
 import Header from "../components/Header/Header";
@@ -14,7 +13,7 @@ import NewApplication from "../components/NewApplication/NewApplication";
 import Application from "../components/Application/Application";
 import NewProperty from "../components/NewProperty/NewProperty";
 import Applications from "../components/Applications/Applications";
-import Question from "../components/Question/Question";
+import NewQuestion from "../components/NewQuestion/NewQuestion";
 import Properties from "../components/Properties/Properties";
 import Offers from "../components/Offers/Offers";
 import Error404 from "../pages/Error404";
@@ -75,8 +74,9 @@ function PageRoutes() {
 
             <Route element={<CustomerRoutes />}>
               <Route path="/properties/:id/applications/new" element={<NewApplication />} />
+              <Route path="/properties/:id/questions/new" element={<NewQuestion />} />
               <Route path="/properties/:id/applications" element={<Application />} />
-              <Route path="/my-applications" element={<Applications />} />
+              <Route path="/applications" element={<Applications />} />
             </Route>
 
             <Route path="/login" element={<LoginPage />} />

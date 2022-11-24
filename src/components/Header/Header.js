@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { Col, Row, Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import "./Header.css";
 import {useKeycloak} from "@react-keycloak/web";
 import ViewerHeader from "./ViewerHeader/ViewerHeader";
@@ -10,7 +10,6 @@ import OwnerHeader from "./OwnerHeader/OwnerHeader";
 import CustomerHeader from "./CustomerHeader/CustomerHeader";
 
 const Header= () => {
-    const navigate = useNavigate();
     const {keycloak, initialized} = useKeycloak();
     const [loginState, setLoginState] = useState(null);
     const [headerState, setHeaderState] = useState(<ViewerHeader/>);

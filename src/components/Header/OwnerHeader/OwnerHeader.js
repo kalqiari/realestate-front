@@ -1,5 +1,5 @@
 import {Col, Row} from "react-bootstrap";
-import {Link, Route} from "react-router-dom";
+import {Link} from "react-router-dom";
 import React from "react";
 
 const OwnerHeader = () => {

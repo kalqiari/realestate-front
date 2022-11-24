@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-function Question() {
+function NewQuestion() {
   const [question, setQuestion] = useState("");
   const formRef = useRef();
 
@@ -65,4 +65,4 @@ function Question() {
   );
 }
 
-export default Question;
+export default NewQuestion;
