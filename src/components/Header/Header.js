@@ -1,7 +1,10 @@
 import React from "react";
-import { Col, Row, Button } from "react-bootstrap";
+import { Col, Row, Button, Popover, OverlayTrigger } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
+import AdminDropDown from "./Dropdowns/AdminDropDown/AdminDropDown";
+import CustomerDropDown from "./Dropdowns/CustomerDropDown/CustomerDropDown";
+import OwnerDropDown from "./Dropdowns/OwnerDropDown/OwnerDropDown";
 import "./Header.css";
 
 function Header() {
@@ -17,17 +20,23 @@ function Header() {
           <Row>
             <Col>
               <Link className="link-route" to="/admin">
-                <h4 style={{ color: "purple" }}>Admin</h4>
+                <AdminDropDown>
+                  <h4 style={{ color: "purple" }}>Admin</h4>
+                </AdminDropDown>
               </Link>
             </Col>
             <Col>
               <Link className="link-route" to="/customer">
-                <h4 style={{ color: "orange" }}>Customer</h4>
+                <CustomerDropDown>
+                  <h4 style={{ color: "orange" }}>Customer</h4>
+                </CustomerDropDown>
               </Link>
             </Col>
             <Col>
               <Link className="link-route" to="/owner">
-                <h4 style={{ color: "grey" }}>Owner</h4>
+                <OwnerDropDown>
+                  <h4 style={{ color: "grey" }}>Owner</h4>
+                </OwnerDropDown>
               </Link>
             </Col>
           </Row>
