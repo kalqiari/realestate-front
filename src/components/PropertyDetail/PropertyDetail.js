@@ -9,6 +9,8 @@ import axios from "axios";
 import Loader from "../Loader/Loader";
 
 function PropertyDetail() {
+  const [like, setLike] = useState(false);
+  const [favIcon, setFavIcon] = useState(<i class="bi bi-heart"></i>);
   const [houseData, setHouseData] = useState(null);
   let navigate = useNavigate();
   const { id } = useParams();
@@ -21,8 +23,14 @@ function PropertyDetail() {
         console.log(error)
       })
   }, [id]);
-    
 
+  const favorite = () => {
+    if (like) {
+      setFavIcon(<i class="bi bi-heart-fill"></i>);
+    } else {
+      setLike(<i class="bi bi-heart"></i>);
+    }
+  };
   return (
     <Container>
       <div>
@@ -34,9 +42,8 @@ function PropertyDetail() {
               </Col>
               <Col>
                 <Card.Body>
-                  <div>
-                    <i className="bi bi-heart"></i>
-                  </div>
+
+                  <div onClick={() => favorite(setLike(!like))}>{favIcon}</div>
                   <Card.Title>Price: {houseData.price} </Card.Title>
                   <Card.Text style={{ color: "purple" }}>
                     {houseData?.bedrooms + " bds | " + houseData?.bathrooms +" ba |"+ houseData?.sqFt + " sqft | House for "+ houseData?.listingType}
