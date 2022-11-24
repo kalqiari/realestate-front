@@ -3,13 +3,13 @@ import { Container, Row, Col, Spinner } from "react-bootstrap";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { dummyDataContext } from "../contexts/ContextFile";
 
 function PropertyDetail() {
   const [houseData, setHouseData] = useState([]);
   const dummyData = useContext(dummyDataContext);
-
+  let navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -39,12 +39,20 @@ function PropertyDetail() {
                   <Card.Text style={{ color: "red" }}>
                     {houseData[0].location}
                   </Card.Text>
-                  <Button className="m-2" variant="outline-success">
-                    Contact Agent
+                  <Button
+                    className="m-2 px-5"
+                    variant="outline-success"
+                    onClick={() =>
+                      navigate("/application", {
+                        state: { id: id, name: "sabaoon" },
+                      })
+                    }
+                  >
+                    Contact
                   </Button>
-                  <Button className="m-2" variant="outline-warning">
+                  {/* <Button className="m-2" variant="outline-warning">
                     Request a tour
-                  </Button>
+                  </Button> */}
                   <div>
                     <ul>
                       <li>Home Type</li>

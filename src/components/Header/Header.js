@@ -6,11 +6,12 @@ import "./Header.css";
 
 function Header() {
   return (
-    // <Navbar bg="light">
     <Container fluid className="mb-3">
       <Row className="p-3" style={{ border: "2px red groove" }}>
         <Col>
-          <h2 style={{ color: "Blue" }}>Buy/Rent_A_House</h2>
+          <Link className="link-route" to="/">
+            <h2 style={{ color: "Blue" }}>Buy/Rent_A_House</h2>
+          </Link>
         </Col>
         <Col md={6}>
           <Row>
