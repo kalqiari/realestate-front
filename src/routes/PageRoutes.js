@@ -14,6 +14,8 @@ import NewApplication from "../components/NewApplication/NewApplication";
 import Owner from "../components/Users/Owner/Owner";
 import Application from "../components/Application/Application";
 import NewProperty from "../components/NewProperty/NewProperty";
+import Applications from "../components/Applications/Applications";
+import Question from "../components/Question/Question";
 
 function PageRoutes() {
   const eventLogger = (props) => {
@@ -69,6 +71,9 @@ function PageRoutes() {
               <Route path="/application" element={<Application />} />
             </Route>
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/newApplication" element={<NewApplication />} />
+            <Route path="/application" element={<Application />} />
+            <Route path="/question" element={<Question />} />
             <Route path="/" element={<WelcomePage />} />
             <Route path="/newProperty" element={<NewProperty />} />
             <Route path="/property/:id" element={<PropertyDetail />} />

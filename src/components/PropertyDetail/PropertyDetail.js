@@ -8,6 +8,9 @@ import { dummyDataContext } from "../contexts/ContextFile";
 
 function PropertyDetail() {
   const [houseData, setHouseData] = useState([]);
+  const [like, setLike] = useState(false);
+  const [favIcon, setFavIcon] = useState(<i class="bi bi-heart"></i>);
+  const [propertyId, setPropertyId] = useState(0);
   const dummyData = useContext(dummyDataContext);
   let navigate = useNavigate();
   const { id } = useParams();
@@ -18,6 +21,15 @@ function PropertyDetail() {
     );
     setHouseData(singlePropertyData);
   }, [id]);
+
+  const favorite = () => {
+    if (like) {
+      setFavIcon(<i class="bi bi-heart-fill"></i>);
+      // houseData.length > 0 ? setPropertyId(houseData[0].id) : "";
+    } else {
+      setLike(<i class="bi bi-heart"></i>);
+    }
+  };
   return (
     <Container>
       <div>
@@ -29,9 +41,7 @@ function PropertyDetail() {
               </Col>
               <Col>
                 <Card.Body>
-                  <div>
-                    <i class="bi bi-heart"></i>
-                  </div>
+                  <div onClick={() => favorite(setLike(!like))}>{favIcon}</div>
                   <Card.Title>Price: {houseData[0].price} </Card.Title>
                   <Card.Text style={{ color: "purple" }}>
                     {houseData[0].houseDetails}
