@@ -17,6 +17,7 @@ import NewQuestion from "../components/NewQuestion/NewQuestion";
 import Properties from "../components/Properties/Properties";
 import Offers from "../components/Offers/Offers";
 import Error404 from "../pages/Error404";
+import Users from "../components/Users/Users";
 
 function PageRoutes() {
   const eventLogger = (props) => {
@@ -61,21 +62,34 @@ function PageRoutes() {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path='*' element={<Error404 />} />
+            <Route path="*" element={<Error404 />} />
             <Route element={<AdminRoutes />}>
               <Route path="/dashboard" element={<Dashboard />} />
-            </Route>       
+              <Route path="/users" element={<Users />} />
+            </Route>
             <Route element={<OwnerRoutes />}>
               <Route path="/owner/properties" element={<Properties />} />
-              <Route path="/owner/properties/:id" element={<PropertyDetail />} />
+              <Route
+                path="/owner/properties/:id"
+                element={<PropertyDetail />}
+              />
               <Route path="/owner/properties/new" element={<NewProperty />} />
               <Route path="/owner/applications" element={<Offers />} />
             </Route>
 
             <Route element={<CustomerRoutes />}>
-              <Route path="/properties/:id/applications/new" element={<NewApplication />} />
-              <Route path="/properties/:id/questions/new" element={<NewQuestion />} />
-              <Route path="/properties/:id/applications" element={<Application />} />
+              <Route
+                path="/properties/:id/applications/new"
+                element={<NewApplication />}
+              />
+              <Route
+                path="/properties/:id/questions/new"
+                element={<NewQuestion />}
+              />
+              <Route
+                path="/properties/:id/applications"
+                element={<Application />}
+              />
               <Route path="/applications" element={<Applications />} />
             </Route>
 
