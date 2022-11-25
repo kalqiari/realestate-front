@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Api from "../../utils/api";
 
 
 
@@ -17,7 +18,7 @@ const Dashboard = () => {
 
     const getRentedProperties = async () => {
 
-        axios.get("http://localHost:8080/api/v1/properties/findPropertyByPropertyStatus")
+        Api.get("/api/v1/properties/findPropertyByPropertyStatus")
             .then(response => {
                 setRentedProperties([...response.data]);
                 console.log(rentedProperties);
@@ -28,8 +29,7 @@ const Dashboard = () => {
     };
 
     const getCustomers = async () => {
-
-        axios.get("http://localhost:8080/api/v1/users/top10RecentCustomers")
+        Api.get("/api/v1/users/top10RecentCustomers")
             .then(response => {
                 setCustomers([...response.data]);
             })
