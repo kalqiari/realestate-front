@@ -18,7 +18,7 @@ import NewQuestion from "../components/NewQuestion/NewQuestion";
 import Properties from "../components/Properties/Properties";
 import Offers from "../components/Offers/Offers";
 import Error404 from "../pages/Error404";
-import Users from "../components/Users/Users";
+// import Users from "../components/Users/Users";
 
 function PageRoutes() {
   const eventLogger = (props) => {
