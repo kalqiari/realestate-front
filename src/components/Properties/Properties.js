@@ -6,6 +6,7 @@ import Property from "../Property/Property";
 import Api from "../../utils/api";
 import {useParams} from "react-router";
 import {useKeycloak} from "@react-keycloak/web";
+import Search from "../Search/Search";
 
 
 function Properties() {
@@ -25,6 +26,7 @@ function Properties() {
 
     return (
         <div>
+            <Search/>
             <Container>
                 <Row>
                     {propertiesData.map((house) => {

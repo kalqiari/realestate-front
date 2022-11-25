@@ -85,10 +85,8 @@ function Property(props) {
                     " " +
                     props.house.zipcode}
                 </Card.Text>
-                <Card.Text>VILLAGE REALITY</Card.Text>
-                <div>
-                  <div onClick={() => Favorites(setFav(!fav))}>{favIcon}</div>
-                </div>
+                <Card.Text>{props.house.status}</Card.Text>
+
               </Card.Body>
             </Card>
           </Col>
