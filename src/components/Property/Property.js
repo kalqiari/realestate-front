@@ -48,7 +48,7 @@ function Property(props) {
         <Row>
           <Col className="mb-4">
             <Card>
-              <Card.Img width={280} height={210} variant="top" src={props.house?.photos[0].url} />
+              <Card.Img width={280} height={210} variant="top" src={props.house?.photos[0]?.url} />
               <Card.Body>
                 <Card.Title>{props.price} </Card.Title>
                 <Card.Text style={{ color: "purple" }}>

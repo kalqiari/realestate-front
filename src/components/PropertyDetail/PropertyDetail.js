@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import Loader from "../Loader/Loader";
+import Api from "../../utils/api";
 
 function PropertyDetail() {
   const [like, setLike] = useState(false);
@@ -16,7 +17,7 @@ function PropertyDetail() {
 
 
   useEffect(()=>{
-      axios.get("http://localhost:8080/api/v1/properties/"+ id).then(response => {
+      Api.get("/api/v1/properties/"+ id).then(response => {
         setHouseData(response.data)
       }).catch(error => {
         console.log(error)
@@ -37,7 +38,7 @@ function PropertyDetail() {
           <Card style={{ marginTop: "55px" }}>
             <Row>
               <Col>
-                <Card.Img variant="top" src={houseData?.photos[0].url} />
+                <Card.Img variant="top" src={houseData?.photos[0]?.url} />
               </Col>
               <Col>
                 <Card.Body>

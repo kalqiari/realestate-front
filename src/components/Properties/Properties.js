@@ -3,18 +3,16 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import Property from "../Property/Property";
-import keycloak from "../../keycloak";
-import axios from "axios";
+import Api from "../../utils/api";
 
 function Properties() {
   const [propertiesData, setPropertiesData]= useState([]);
   useEffect(()=>{
-       axios.get("http://localhost:8080/api/v1/properties").then(response => {
+      Api.get("/api/v1/properties").then(response => {
            setPropertiesData( response.data)
                   }).catch(error => {
                       console.log(error)
                   })
-
   },[] )
 
   return (
