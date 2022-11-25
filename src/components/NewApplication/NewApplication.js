@@ -2,19 +2,24 @@ import React, { useRef, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import {useLocation, useParams} from "react-router";
+import {useLocation, useNavigate, useParams} from "react-router";
+import axios from "axios";
+import {useKeycloak} from "@react-keycloak/web";
+import Api from "../../utils/api";
 
 function NewApplication() {
     const [applicationData, setApplicationData] = useState({});
     const formRef = useRef();
     const {id} = useParams();
+    const {keycloak} = useKeycloak();
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = formRef.current;
         const dataForm = {
             propertyId: id,
-            optionType: form["optionType"].value,
+            applicationType: form["optionType"].value,
             employmentInfo: form["employmentInfo"].value,
             creditScore: form["creditScore"].value,
             message: form["message"].value,
@@ -22,6 +27,13 @@ function NewApplication() {
         };
 
         setApplicationData(dataForm);
+        Api.post("/api/v1/applications", dataForm,{
+            headers: keycloak?.token ? {authorization: `Bearer ${keycloak?.token}`} : {}
+        }  ).then(response => {
+            navigate("/applications")
+        }).catch(error => {
+            console.log(error)
+        })
         e.target.reset();
     };
     console.log(applicationData);

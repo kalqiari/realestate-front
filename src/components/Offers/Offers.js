@@ -1,56 +1,44 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import houseImage from "../../resources/images/house.jpg";
+import {useSearchParams} from "react-router-dom";
+import {useKeycloak} from "@react-keycloak/web";
+import Api from "../../utils/api";
+import Offer from "../Offer/Offer";
+
 
 function Offers(props) {
+  const [applicationsData, setApplicationsData] = useState([]);
+  const [searchParams] = useSearchParams()
+  const {keycloak} = useKeycloak();
+
+  useEffect(() => {
+    Api.get("/api/v1/applications", {
+      params: searchParams,
+      headers: keycloak?.token ? {authorization: `Bearer ${keycloak?.token}`} : {}
+    }).then(response => {
+      setApplicationsData(response.data)
+    }).catch(error => {
+      console.log(error)
+    })
+  }, [keycloak?.authenticated,searchParams ])
+
   return (
-    <Container>
-      <Row className="mb-5">
-        <Col md={{ offset: 3, span: 5 }}>
-          <h2 style={{ color: "purple" }} className="text-center">
-            OFFERS
-          </h2>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Card style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={houseImage} />
-            <Card.Body>
-              <Card.Title>Customer Name: Loose Criminal</Card.Title>
-              <Card.Text>
-                {" "}
-                <b>Application Type:</b>Rent
-              </Card.Text>
-              <Card.Text>
-                <b>Employment Info:</b> Criminal
-              </Card.Text>
-              <Card.Text>
-                <b>Credit Score:</b> 7
-              </Card.Text>
-              <Card.Text>
-                <b>Message:</b> I'll be paying it timely with stolen money
-              </Card.Text>
-              <Row>
-                <Col>
-                  <Button style={{ width: "100%" }} variant="success">
-                    Accept
-                  </Button>
-                </Col>
-                <Col>
-                  <Button style={{ width: "100%" }} variant="danger">
-                    Decline
-                  </Button>
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+      <div>
+        <Container>
+          <Row>
+            {applicationsData.map((application) => {
+              return (
+                  <Col md={3} key={application.id}>
+                      <Offer
+                          app={application}
+                      />
+                  </Col>
+              );
+            })}
+          </Row>
+        </Container>
+      </div>
   );
 }
 

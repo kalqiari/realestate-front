@@ -1,22 +1,30 @@
 import axios from "axios";
 import keycloak from "../keycloak";
 
+axios.interceptors.request.use(async config => {
+
+    if (typeof window == 'undefined') {
+        return;
+    }
+    const accessToken = keycloak?.token;
+
+
+
+    config.headers = {
+        ...config.headers
+    };
+    if (accessToken) {
+        config.headers.authorization = `Bearer ${accessToken}`;
+    }
+
+    return config;
+});
 
 const Api = axios.create({
     baseURL: "http://localhost:8080"
 })
 
-Api.interceptors.request.use(
-    config => {
-        const token = keycloak?.token
-        if (token) {
-            config.headers['Authorization'] = 'Bearer ' + token
-        }
-        return config
-    },
-    error => {
-        Promise.reject(error)
-    }
-)
+
+
 
 export default Api

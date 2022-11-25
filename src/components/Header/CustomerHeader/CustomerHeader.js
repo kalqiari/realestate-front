@@ -21,11 +21,6 @@ const CustomerHeader = () => {
                         <h4 style={{color: "grey"}}>My Applications</h4>
                     </Link>
                 </Col>
-                <Col>
-                    <Link className="link-route" to="/applications">
-                        <h4 style={{color: "grey"}}>Offer History</h4>
-                    </Link>
-                </Col>
 
             </Row>
     )

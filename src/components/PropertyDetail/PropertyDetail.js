@@ -7,15 +7,16 @@ import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import Loader from "../Loader/Loader";
 import Api from "../../utils/api";
+import config from "bootstrap/js/src/util/config";
+import {useKeycloak} from "@react-keycloak/web";
 
 function PropertyDetail() {
   const [like, setLike] = useState(false);
-  const [favIcon, setFavIcon] = useState(<i class="bi bi-heart"></i>);
+  const [favIcon, setFavIcon] = useState(<i className="bi bi-heart"></i>);
   const [houseData, setHouseData] = useState(null);
   let navigate = useNavigate();
   const { id } = useParams();
-
-
+  const { keycloak }  = useKeycloak()
   useEffect(()=>{
       Api.get("/api/v1/properties/"+ id).then(response => {
         setHouseData(response.data)
@@ -25,11 +26,18 @@ function PropertyDetail() {
   }, [id]);
 
   const favorite = () => {
-    if (like) {
-      setFavIcon(<i class="bi bi-heart-fill"></i>);
-    } else {
-      setLike(<i class="bi bi-heart"></i>);
-    }
+            Api.put(`/api/v1/properties/${id}/favoriteToggle`, { }, {
+                headers: keycloak?.token ? {authorization: `Bearer ${keycloak?.token}`} : {}
+            }).then(response => {
+                if (!like) {
+                    setFavIcon(<i className="bi bi-heart-fill"></i>);
+                 } else {
+                    setFavIcon(<i className="bi bi-heart"></i>);
+                 }
+                setLike(!like);
+            }).catch(error => {
+                console.log(error)
+            })
   };
   return (
     <Container>

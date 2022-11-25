@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Api from "../../utils/api";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
 
     const fetchData = () => {
-        axios.get("http://localHost:8080/api/v1/users")
+        Api.get("/api/v1/users")
             .then(response => {
                 setUsers([...response.data]);
             })
