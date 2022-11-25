@@ -63,7 +63,7 @@ function Property(props) {
                 width={280}
                 height={210}
                 variant="top"
-                src={props.house?.photos[0].url}
+                src={props.house?.photos[0]?.url}
               />
               <Card.Body>
                 <Card.Title>{props.price} </Card.Title>

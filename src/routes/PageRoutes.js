@@ -9,6 +9,7 @@ import Header from "../components/Header/Header";
 import PropertyDetail from "../components/PropertyDetail/PropertyDetail";
 import { AdminRoutes, OwnerRoutes, CustomerRoutes } from "../utils/utils";
 import Dashboard from "../pages/admin/Dashboard";
+import Users from "../pages/admin/Users";
 import NewApplication from "../components/NewApplication/NewApplication";
 import Application from "../components/Application/Application";
 import NewProperty from "../components/NewProperty/NewProperty";
@@ -17,7 +18,7 @@ import NewQuestion from "../components/NewQuestion/NewQuestion";
 import Properties from "../components/Properties/Properties";
 import Offers from "../components/Offers/Offers";
 import Error404 from "../pages/Error404";
-import Users from "../components/Users/Users";
+
 
 function PageRoutes() {
   const eventLogger = (props) => {

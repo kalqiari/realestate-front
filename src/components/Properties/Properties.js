@@ -1,44 +1,50 @@
 import React, {useContext, useEffect, useState} from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import {Col, Container, Row} from "react-bootstrap";
+import {Link, useSearchParams} from "react-router-dom";
 
 import Property from "../Property/Property";
-import keycloak from "../../keycloak";
-import axios from "axios";
+import Api from "../../utils/api";
+import {useParams} from "react-router";
+import {useKeycloak} from "@react-keycloak/web";
+
 
 function Properties() {
-  const [propertiesData, setPropertiesData]= useState([]);
-  useEffect(()=>{
-       axios.get("http://localhost:8080/api/v1/properties").then(response => {
-           setPropertiesData( response.data)
-                  }).catch(error => {
-                      console.log(error)
-                  })
+    const [propertiesData, setPropertiesData] = useState([]);
+    const [searchParams] = useSearchParams()
+    const {keycloak} = useKeycloak();
+    useEffect(() => {
+        Api.get("/api/v1/properties", {
+            params: searchParams,
+            headers: keycloak?.token ? {authorization: `Bearer ${keycloak?.token}`} : {}
+        }).then(response => {
+            setPropertiesData(response.data)
+        }).catch(error => {
+            console.log(error)
+        })
+    }, [keycloak?.authenticated,searchParams ])
 
-  },[] )
-
-  return (
-    <div>
-      <Container>
-        <Row>
-          {propertiesData.map((house) => {
-            return (
-              <Col md={3} key={house.id}>
-                <Link
-                  to={`/properties/${house.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Property
-                      house={house}
-                  />
-                </Link>
-              </Col>
-            );
-          })}
-        </Row>
-      </Container>
-    </div>
-  );
+    return (
+        <div>
+            <Container>
+                <Row>
+                    {propertiesData.map((house) => {
+                        return (
+                            <Col md={3} key={house.id}>
+                                <Link
+                                    to={`/properties/${house.id}`}
+                                    style={{textDecoration: "none"}}
+                                >
+                                    <Property
+                                        house={house}
+                                    />
+                                </Link>
+                            </Col>
+                        );
+                    })}
+                </Row>
+            </Container>
+        </div>
+    );
 }
 
 export default Properties;
