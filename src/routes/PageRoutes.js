@@ -9,6 +9,7 @@ import Header from "../components/Header/Header";
 import PropertyDetail from "../components/PropertyDetail/PropertyDetail";
 import { AdminRoutes, OwnerRoutes, CustomerRoutes } from "../utils/utils";
 import Dashboard from "../pages/admin/Dashboard";
+import Users from "../pages/admin/Users";
 import NewApplication from "../components/NewApplication/NewApplication";
 import Application from "../components/Application/Application";
 import NewProperty from "../components/NewProperty/NewProperty";
@@ -66,7 +67,7 @@ function PageRoutes() {
             <Route element={<AdminRoutes />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/users" element={<Users />} />
-            </Route>
+            </Route>       
             <Route element={<OwnerRoutes />}>
               <Route path="/owner/properties" element={<Properties />} />
               <Route
