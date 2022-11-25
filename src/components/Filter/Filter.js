@@ -6,21 +6,21 @@ import { Fragment, useRef } from "react";
 import { useNavigate } from "react-router";
 
 const Filter = (props) => {
-  //   const [searchParams, setSearchParams] = useSearchParams({});
+  const [searchParams, setSearchParams] = useSearchParams({});
   const [filterData, setFilterData] = useState({});
   const navigate = useNavigate();
   const form = useRef();
   const submitHandler = (e) => {
     e.preventDefault();
 
-    // if (form.current["filter"].value) {
-    //   const params = searchParams;
-    //   params.set("filter", form.current["filter"].value);
-    //   params.set("input", form.current["input"].value);
-    //   setSearchParams(params);
-    //   console.log(params);
-    // }
-    // else navigate("/students");
+    if (form.current["filter"].value) {
+      const params = searchParams;
+      params.set("filter", form.current["filter"].value);
+      params.set("input", form.current["input"].value);
+      setSearchParams(params);
+      console.log(params);
+    }
+    else navigate("/");
 
     const dataForm = {
       filter: form.current["filter"].value,
@@ -43,9 +43,10 @@ const Filter = (props) => {
                 <Form.Group>
                   <Form.Label>Filter:</Form.Label>
                   <Form.Select name={"filter"}>
-                    <option value="price">Price</option>
-                    <option value="location">Location</option>
-                    <option value="address">Address</option>
+                    <option value="default"></option>
+                    <option value="price">Price &lt;</option>
+                    <option value="state">State</option>
+                    <option value="city">City</option>
                     <option value="numberOfRooms">Number of Rooms</option>
                     <option value="homeType">Home Type</option>
                   </Form.Select>
