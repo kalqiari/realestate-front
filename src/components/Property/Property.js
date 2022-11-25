@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Container, Row, Card } from "react-bootstrap";
-
 
 // {
 //   "id": 22,
@@ -42,22 +41,53 @@ import { Col, Container, Row, Card } from "react-bootstrap";
 //     location: "1964 Savanna Cir, Fairfield, IA 52556",
 // },
 function Property(props) {
+  const [fav, setFav] = useState(false);
+  const [favIcon, setFavIcon] = useState(<i className="bi bi-heart"></i>);
+
+  const Favorites = () => {
+    if (fav) {
+      setFavIcon(<i className="bi bi-heart"></i>);
+      console.log("Propety not favorite");
+    } else {
+      setFavIcon(<i class="bi bi-heart-fill"></i>);
+      console.log("Propety is favorite");
+    }
+  };
   return (
     <div>
       <Container>
         <Row>
           <Col className="mb-4">
             <Card>
-              <Card.Img width={280} height={210} variant="top" src={props.house?.photos[0].url} />
+              <Card.Img
+                width={280}
+                height={210}
+                variant="top"
+                src={props.house?.photos[0].url}
+              />
               <Card.Body>
                 <Card.Title>{props.price} </Card.Title>
                 <Card.Text style={{ color: "purple" }}>
-                  {props.house?.bedrooms + " bds | " + props.house?.bathrooms +" ba |"+ props.house?.sqFt + " sqft | House for "+ props.house?.listingType}
+                  {props.house?.bedrooms +
+                    " bds | " +
+                    props.house?.bathrooms +
+                    " ba |" +
+                    props.house?.sqFt +
+                    " sqft | House for " +
+                    props.house?.listingType}
                 </Card.Text>
-                <Card.Text style={{ color: "red" }}>{props.house.streetAddress + ", "+ props.house.city+ ", "+props.house.state+ " " +props.house.zipcode }</Card.Text>
+                <Card.Text style={{ color: "red" }}>
+                  {props.house.streetAddress +
+                    ", " +
+                    props.house.city +
+                    ", " +
+                    props.house.state +
+                    " " +
+                    props.house.zipcode}
+                </Card.Text>
                 <Card.Text>VILLAGE REALITY</Card.Text>
                 <div>
-                  <i className="bi bi-heart"></i>
+                  <div onClick={() => Favorites(setFav(!fav))}>{favIcon}</div>
                 </div>
               </Card.Body>
             </Card>
