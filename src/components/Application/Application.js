@@ -8,9 +8,29 @@ import {
   ProgressBar,
 } from "react-bootstrap";
 import houseImage from "../../resources/images/house.jpg";
+import Button from "react-bootstrap/Button";
+
+
 
 function Application(props) {
-  console.log(props);
+
+  const status  = (props.app.reviewStatus == "Pending" ?
+    <div>
+      Status: {props.app.reviewStatus}{" "}
+      <span><ProgressBar variant="info" now={0} /></span>
+    </div>
+: props.app.reviewStatus == "Accepted" ?
+        <div>
+          Status: {props.app.reviewStatus}{" "}
+          <span><ProgressBar variant="success" now={100} /></span>
+        </div>
+
+      :
+        <div>
+          Status: {props.app.reviewStatus}{" "}
+          <span><ProgressBar variant="danger" now={100} /></span>
+        </div>
+   )
   return (
     <div>
       <Container>
@@ -25,21 +45,8 @@ function Application(props) {
               />
               <Card.Body>
                 <Card.Title>Price: {props.app.property.price}</Card.Title>
-                <Card.Text>
-                  {props.app.property.bedrooms}bds |{" "}
-                  {props.app.property.bathrooms} ba | {props.app.property.sqft}
-                  sqFT
-                </Card.Text>
-                <div>
-                  Status: {props.app.reviewStatus}
-                  <span>
-                    {props.app.reviewStatus == "Approved" ? (
-                      <ProgressBar variant="success" now={100} />
-                    ) : (
-                      <ProgressBar variant="danger" now={100} />
-                    )}
-                  </span>
-                </div>
+                <Card.Text>{props.app.property.bedrooms}bds | {props.app.property.bathrooms} ba | {props.app.property.sqFT} sqFT</Card.Text>
+                {status}
               </Card.Body>
             </Card>
           </Col>

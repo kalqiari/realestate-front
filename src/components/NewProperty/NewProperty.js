@@ -2,11 +2,15 @@ import React, { useRef, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Api from "../../utils/api";
+import {useKeycloak} from "@react-keycloak/web";
+import {useNavigate} from "react-router";
 
 function NewProperty() {
   const [newPropertyData, setNewPropertyData] = useState({});
   const formRef = useRef();
-
+  const {keycloak} = useKeycloak()
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = formRef.current;
@@ -35,7 +39,13 @@ function NewProperty() {
       photo: form["photo"].value,
     };
 
-    setNewPropertyData(dataForm);
+    Api.post("/api/v1/properties", dataForm, {
+      headers: keycloak?.token ? {authorization: `Bearer ${keycloak?.token}`} : {}
+    }).then(response => {
+      navigate("/")
+    }).catch(error => {
+      console.log(error)
+    })
     e.target.reset();
   };
 
