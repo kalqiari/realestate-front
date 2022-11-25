@@ -18,7 +18,7 @@ import NewQuestion from "../components/NewQuestion/NewQuestion";
 import Properties from "../components/Properties/Properties";
 import Offers from "../components/Offers/Offers";
 import Error404 from "../pages/Error404";
-
+// import Filter from "../components/Filter/Filter";
 
 function PageRoutes() {
   const eventLogger = (props) => {
@@ -96,6 +96,8 @@ function PageRoutes() {
 
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<HomePage />} />
+            {/* <Route path="/" element={<Filter />} /> */}
+
             <Route path="/properties/:id" element={<PropertyDetail />} />
           </Routes>
         </BrowserRouter>
