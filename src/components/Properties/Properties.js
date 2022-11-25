@@ -33,7 +33,8 @@ function Properties() {
       <Container>
         <Row>
           <Col>
-            <Filter />
+
+            { keycloak?.hasResourceRole('owner') ||  keycloak?.hasResourceRole('admin') || searchParams.get('favorite') ? null  :  <Filter />}
           </Col>
         </Row>
         <Row>

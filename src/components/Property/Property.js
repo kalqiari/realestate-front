@@ -66,7 +66,7 @@ function Property(props) {
                 src={props.house?.photos[0]?.url}
               />
               <Card.Body>
-                <Card.Title>{props.price} </Card.Title>
+                <Card.Title>{props.house?.price} </Card.Title>
                 <Card.Text style={{ color: "purple" }}>
                   {props.house?.bedrooms +
                     " bds | " +

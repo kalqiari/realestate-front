@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
 // import "./Filter.css";
 import { useSearchParams } from "react-router-dom";
@@ -22,15 +22,11 @@ const Filter = (props) => {
     }
     else navigate("/");
 
-    const dataForm = {
-      filter: form.current["filter"].value,
-      input: form.current["input"].value,
-    };
 
-    setFilterData(dataForm);
-    e.target.reset();
-    console.log(filterData);
+
   };
+
+
   const space = <Fragment>&nbsp;&nbsp;</Fragment>;
 
   return (
@@ -47,6 +43,7 @@ const Filter = (props) => {
                     <option value="price">Price &lt;</option>
                     <option value="state">State</option>
                     <option value="city">City</option>
+                    <option value="zipcode">Zipcode</option>
                     <option value="numberOfRooms">Number of Rooms</option>
                     <option value="homeType">Home Type</option>
                   </Form.Select>
