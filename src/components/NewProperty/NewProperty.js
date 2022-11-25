@@ -3,13 +3,13 @@ import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Api from "../../utils/api";
-import {useKeycloak} from "@react-keycloak/web";
-import {useNavigate} from "react-router";
+import { useKeycloak } from "@react-keycloak/web";
+import { useNavigate } from "react-router";
 
 function NewProperty() {
   const [newPropertyData, setNewPropertyData] = useState({});
   const formRef = useRef();
-  const {keycloak} = useKeycloak()
+  const { keycloak } = useKeycloak();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,25 +27,29 @@ function NewProperty() {
       description: form["description"].value,
       price: form["price"].value,
       homeType: form["homeType"].value,
-      sqft: form["sqft"].value,
+      sqFt: form["sqft"].value,
       bedrooms: form["bedrooms"].value,
       pool: form["pool"].value,
       parkingType: form["parkingType"].value,
 
       parkingSpaces: form["parkingSpaces"].value,
-      flooringType: form["flooringType"].value,
+      floorType: form["floorType"].value,
       yearBuilt: form["yearBuilt"].value,
-      purchaseComplete: form["purchaseComplete"].value,
-      photo: form["photo"].value,
+      status: form["status"].value,
+      photos: form["photos"].value,
     };
 
     Api.post("/api/v1/properties", dataForm, {
-      headers: keycloak?.token ? {authorization: `Bearer ${keycloak?.token}`} : {}
-    }).then(response => {
-      navigate("/")
-    }).catch(error => {
-      console.log(error)
+      headers: keycloak?.token
+        ? { authorization: `Bearer ${keycloak?.token}` }
+        : {},
     })
+      .then((response) => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     e.target.reset();
   };
 
@@ -184,7 +188,7 @@ function NewProperty() {
                   </Form.Label>
                   <Form.Control
                     required={true}
-                    name={"sqft"}
+                    name={"sqFt"}
                     type="text"
                     placeholder="Square Foot"
                   />
@@ -220,8 +224,8 @@ function NewProperty() {
                     name={"parkingType"}
                     aria-label="Default select example"
                   >
-                    <option value="SALE">Open</option>
-                    <option value="RENT">Close</option>
+                    <option value="OPEN">Open</option>
+                    <option value="CLOSE">Close</option>
                   </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -240,7 +244,7 @@ function NewProperty() {
                     <b>Flooring Type</b>
                   </Form.Label>
                   <Form.Select
-                    name={"flooringType"}
+                    name={"floorType"}
                     aria-label="Default select example"
                   >
                     <option value="CARPET">Carpet</option>
@@ -263,7 +267,7 @@ function NewProperty() {
                     <b>Is Purchase Complete?</b>
                   </Form.Label>
                   <Form.Select
-                    name={"purchaseComplete"}
+                    name={"status"}
                     aria-label="Default select example"
                   >
                     <option value="TRUE">Yes</option>
@@ -278,7 +282,7 @@ function NewProperty() {
                     required={true}
                     type="file"
                     size="sm"
-                    name={"photo"}
+                    name={"photos"}
                     multiple
                   />
                 </Form.Group>
