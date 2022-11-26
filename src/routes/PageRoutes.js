@@ -18,6 +18,7 @@ import NewQuestion from "../components/NewQuestion/NewQuestion";
 import Properties from "../components/Properties/Properties";
 import Offers from "../components/Offers/Offers";
 import Error404 from "../pages/Error404";
+import Property from "../components/Property/Property";
 // import Filter from "../components/Filter/Filter";
 
 function PageRoutes() {
@@ -70,6 +71,7 @@ function PageRoutes() {
             </Route>
             <Route element={<OwnerRoutes />}>
               <Route path="/owner/properties" element={<Properties />} />
+              {/* <Route path="/owner/property" element={<Properties />} /> */}
               <Route
                 path="/owner/properties/:id"
                 element={<PropertyDetail />}
@@ -96,7 +98,7 @@ function PageRoutes() {
 
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<HomePage />} />
-            {/* <Route path="/" element={<Filter />} /> */}
+            {/* <Route path="/" element={<Property />} /> */}
 
             <Route path="/properties/:id" element={<PropertyDetail />} />
           </Routes>

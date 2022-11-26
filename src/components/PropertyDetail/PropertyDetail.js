@@ -3,12 +3,12 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, useLocation } from "react-router";
 import axios from "axios";
 import Loader from "../Loader/Loader";
 import Api from "../../utils/api";
 import config from "bootstrap/js/src/util/config";
-import {useKeycloak} from "@react-keycloak/web";
+import { useKeycloak } from "@react-keycloak/web";
 
 function PropertyDetail() {
   const [like, setLike] = useState(false);
@@ -16,29 +16,58 @@ function PropertyDetail() {
   const [houseData, setHouseData] = useState(null);
   let navigate = useNavigate();
   const { id } = useParams();
-  const { keycloak }  = useKeycloak()
-  useEffect(()=>{
-      Api.get("/api/v1/properties/"+ id).then(response => {
-        setHouseData(response.data)
-      }).catch(error => {
-        console.log(error)
+  const { keycloak } = useKeycloak();
+  const location = useLocation();
+  useEffect(() => {
+    Api.get("/api/v1/properties/" + id)
+      .then((response) => {
+        setHouseData(response.data);
       })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [id]);
 
   const favorite = () => {
-            Api.put(`/api/v1/properties/${id}/favoriteToggle`, { }, {
-                headers: keycloak?.token ? {authorization: `Bearer ${keycloak?.token}`} : {}
-            }).then(response => {
-                if (!like) {
-                    setFavIcon(<i className="bi bi-heart-fill"></i>);
-                 } else {
-                    setFavIcon(<i className="bi bi-heart"></i>);
-                 }
-                setLike(!like);
-            }).catch(error => {
-                console.log(error)
-            })
+    Api.put(
+      `/api/v1/properties/${id}/favoriteToggle`,
+      {},
+      {
+        headers: keycloak?.token
+          ? { authorization: `Bearer ${keycloak?.token}` }
+          : {},
+      }
+    )
+      .then((response) => {
+        if (!like) {
+          setFavIcon(<i className="bi bi-heart-fill"></i>);
+        } else {
+          setFavIcon(<i className="bi bi-heart"></i>);
+        }
+        setLike(!like);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+  console.log(houseData);
+  const deletePropertyById = (id) => {
+    Api.delete(`/api/v1/properties/${id}`, {
+      headers: keycloak?.token
+        ? { authorization: `Bearer ${keycloak?.token}` }
+        : {},
+    })
+      .then((response) => {
+        navigate("/");
+        console.log("Deleted successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    deletePropertyById();
+  }, [houseData]);
   return (
     <Container>
       <div>
@@ -53,26 +82,51 @@ function PropertyDetail() {
                   <div onClick={() => favorite(setLike(!like))}>{favIcon}</div>
                   <Card.Title>Price: {houseData.price} </Card.Title>
                   <Card.Text style={{ color: "purple" }}>
-                    {houseData?.bedrooms + " bds | " + houseData?.bathrooms +" ba |"+ houseData?.sqFt + " sqft | House for "+ houseData?.listingType}
+                    {houseData?.bedrooms +
+                      " bds | " +
+                      houseData?.bathrooms +
+                      " ba |" +
+                      houseData?.sqFt +
+                      " sqft | House for " +
+                      houseData?.listingType}
                   </Card.Text>
                   <Card.Text style={{ color: "red" }}>
-                    {houseData.streetAddress + ", "+ houseData.city+ ", "+houseData.state+ " " +houseData.zipcode}
+                    {houseData.streetAddress +
+                      ", " +
+                      houseData.city +
+                      ", " +
+                      houseData.state +
+                      " " +
+                      houseData.zipcode}
                   </Card.Text>
                   <Button
                     className="m-2 px-5"
                     variant="outline-success"
                     onClick={() =>
-
-                      navigate("/properties/"+id+"/applications/new")
+                      navigate("/properties/" + id + "/applications/new")
                     }
                   >
                     Contact
                   </Button>
-                <Button className="m-2" variant="outline-warning" onClick={() =>
-                    navigate("/properties/"+id+"/questions/new")
-                }>
+                  <Button
+                    className="m-2"
+                    variant="outline-warning"
+                    onClick={() =>
+                      navigate("/properties/" + id + "/questions/new")
+                    }
+                  >
                     Need more details
                   </Button>
+                  {location.pathname === `/properties/${houseData.id}` ? (
+                    <Button
+                      onClick={() => deletePropertyById(houseData.id)}
+                      variant="danger"
+                    >
+                      Delete Property
+                    </Button>
+                  ) : (
+                    ""
+                  )}
                   <div>
                     <ul>
                       <li>Home Type</li>
@@ -90,7 +144,7 @@ function PropertyDetail() {
           </Card>
         ) : (
           <>
-           <Loader/>
+            <Loader />
           </>
         )}
       </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Col, Container, Row, Card } from "react-bootstrap";
+import { Col, Container, Row, Card, Button } from "react-bootstrap";
+import { Location, useLocation } from "react-router-dom";
 
 // {
 //   "id": 22,
@@ -44,6 +45,7 @@ function Property(props) {
   const [fav, setFav] = useState(false);
   const [favIcon, setFavIcon] = useState(<i className="bi bi-heart"></i>);
 
+  const location = useLocation();
   const Favorites = () => {
     if (fav) {
       setFavIcon(<i className="bi bi-heart"></i>);
@@ -53,6 +55,8 @@ function Property(props) {
       console.log("Propety is favorite");
     }
   };
+  // console.log(props);
+
   return (
     <div>
       <Container>
@@ -86,7 +90,6 @@ function Property(props) {
                     props.house.zipcode}
                 </Card.Text>
                 <Card.Text>{props.house.status}</Card.Text>
-
               </Card.Body>
             </Card>
           </Col>
