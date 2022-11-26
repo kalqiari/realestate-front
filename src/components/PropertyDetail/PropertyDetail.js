@@ -65,9 +65,8 @@ function PropertyDetail() {
         console.log(error);
       });
   };
-  useEffect(() => {
-    deletePropertyById();
-  }, [houseData]);
+
+
   return (
     <Container>
       <div>
@@ -117,7 +116,7 @@ function PropertyDetail() {
                   >
                     Need more details
                   </Button>
-                  {location.pathname === `/properties/${houseData.id}` ? (
+                  {location.pathname === `/properties/${houseData.id}` && keycloak?.hasResourceRole('owner') ? (
                     <Button
                       onClick={() => deletePropertyById(houseData.id)}
                       variant="danger"
